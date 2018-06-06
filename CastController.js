@@ -1,6 +1,5 @@
 const context = cast.framework.CastReceiverContext.getInstance();
 const playerManager = context.getPlayerManager();
-const options = new cast.framework.CastReceiverOptions();
 const CUSTOM_CHANNEL = 'urn:x-cast:nl.harmannij.achtungchromecast';
 
 var currentMedia;
@@ -30,8 +29,6 @@ function reloadMedia() {
 }
 
 function runController(players) {
-	options.maxInactivity = 3600;
-
 	context.addCustomMessageListener(CUSTOM_CHANNEL, function(customEvent) {
 
 		if(customEvent.data == "Ready") {
@@ -87,7 +84,7 @@ function runController(players) {
 		}
 	});
 
-	context.start(options);
+	context.start();
 
 	playerManager.addEventListener(cast.framework.events.EventType.MEDIA_FINISHED, function(event){
 		console.log(event);
@@ -100,6 +97,7 @@ function runController(players) {
 }
 
 function onGameStart() {
+	loadMedia("dance.mp3");
 	sendMessage("GameStarted");
 }
 

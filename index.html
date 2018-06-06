@@ -20,12 +20,38 @@
 			max-height: 100%;
 		}
 		#game_area {
-			outline: solid red 2pt;
+			outline: solid 6pt;
 			width: 100%;
 			height: 100%;
+			animation-duration: 5s;
+			animation-name: outlinecolors;
+			animation-iteration-count: infinite;
+		}
+		@keyframes outlinecolors {
+			from {
+				outline-color: #FF0000;
+			}
+			16% {
+				outline-color: #FFFF00;
+			}
+			33% {
+				outline-color: #00FF00;
+			}
+			50% {
+				outline-color: #00FFFF;
+			}
+			67% {
+				outline-color: #FF69B4;
+			}
+			84% {
+				outline-color: #D3D3D3;
+			}
+			to {
+				outline-color: #FF0000;
+			}
 		}
 		#scoreboard {
-			outline: solid red 2pt;
+			/*outline: solid red 2pt;*/
     		color: white;
     		position: absolute;
     		right: 0;

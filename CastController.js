@@ -42,43 +42,9 @@ function loadMedia(media) {
 	    function(errorCode) { console.log('Error code: ' + errorCode); }
 	);
 }
-
 function reloadMedia() {
 	if(currentMedia)
 		loadMedia(currentMedia);
-}
-
-function checkSenders() {
-	var senders = context.getSenders();
-	for(var s in senders) {
-		var sender =  senders[s];
-		var found = false;
-		for(var i = players.length; !found && i >= 0; i--) {
-			var player = players[i];
-			found = player.senderId == sender.senderId;
-		}
-		if(!found) {
-			var player = registerPlayer();
-			if(player) {
-				player.senderId = sender.senderId;
-				setTimeout(function(){
-					sendMessage(gameRunning ? "GameStarted" : "WaitingRoom", sender.senderId);
-					sendMessage({"name": player.name, "color": player.color}, sender.senderId);
-				}, 500);
-			}
-		}
-	}
-	for(var p in players) {
-		var player =  players[p];
-		var found = false;
-		for(var i = senders.length; !found && i >= 0; i--) {
-			var sender = senders[i];
-			found = player.senderId == sender.senderId;
-		}
-		if(!found) {
-			unregisterPlayer(player);
-		}
-	}
 }
 
 function runController(players) {
@@ -118,12 +84,23 @@ function runController(players) {
 
 	context.addEventListener(cast.framework.system.EventType.SENDER_CONNECTED, function(event){
 		console.log(event);
-		checkSenders();
+		var player = registerPlayer();
+		if(player) {
+			player.senderId = event.senderId;
+			setTimeout(function(){
+				sendMessage(gameRunning ? "GameStarted" : "WaitingRoom", event.senderId);
+				sendMessage({"name": player.name, "color": player.color}, event.senderId);
+			}, 500);
+		}
 	});
 
 	context.addEventListener(cast.framework.system.EventType.SENDER_DISCONNECTED, function(event){
 		console.log(event);
-		checkSenders();
+		for(var i in waitingRoom) {
+			if(waitingRoom[i].senderId == event.senderId) {
+				unregisterPlayer(waitingRoom[i]);
+			}
+		}
 	});
 
 	context.start();

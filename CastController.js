@@ -53,7 +53,7 @@ function checkSenders() {
 	for(var s in senders) {
 		var sender =  senders[s];
 		var found = false;
-		for(var i = players.length; !found && i >= 0; i--) {
+		for(var i = players.length - 1; !found && i >= 0; i--) {
 			var player = players[i];
 			found = player.senderId == sender.senderId;
 		}
@@ -71,7 +71,7 @@ function checkSenders() {
 	for(var p in players) {
 		var player =  players[p];
 		var found = false;
-		for(var i = senders.length; !found && i >= 0; i--) {
+		for(var i = senders.length - 1; !found && i >= 0; i--) {
 			var sender = senders[i];
 			found = player.senderId == sender.senderId;
 		}

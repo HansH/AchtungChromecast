@@ -1,0 +1,55 @@
+html, body {
+	background-color: black;
+	padding: 10pt;
+}
+#container {
+	position: relative;
+}
+#canvasContainer {
+	position: relative;
+	display: inline-block;
+	width: 80%;
+	max-width: 1000px;
+	max-height: 100%;
+}
+#game_area {
+	outline: solid red 2pt;
+	width: 100%;
+	height: 100%;
+}
+#scoreboard {
+	outline: solid red 2pt;
+	color: white;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font: x-large sans-serif;
+	padding: 2pt;
+	width: 15%;
+}
+#winnerMessage {
+    width: 100%;
+    text-align: center;
+}
+#waitingRoomOverlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-size: xx-large;
+	font-weight: bold;
+	color: white;
+	padding: 50pt;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+#credits {
+	position: absolute;
+	bottom: 1ex;
+	font-size: small;
+	font-weight: normal;
+}
+#player {
+	display: none;
+}
